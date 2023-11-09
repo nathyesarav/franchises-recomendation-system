@@ -69,13 +69,14 @@ st.sidebar.header("DataFrame Demo")
 st.write(
     """Test del sistema de recomendación de negocios para invertir en  Florida"""
 )
+
 form_sr = st.form('my_form')
-nombre_negocio = form_sr.text_input('Nombre del negocio...')
+nombre_usuario = form_sr.text_input('Nombre del usuario...')
 submit = form_sr.form_submit_button('Recomendar')
-recomendaciones = 'Ingrese el nombre de la franquicia'
+recomendaciones = 'Ingrese el nombre del usuario'
 
 if submit:
-    resultados = sr_franquicia_franquicia(nombre_negocio)
+    resultados = sr_usuario_franquicia(nombre_usuario)
     form_sr.subheader(resultados)
 else:
     form_sr.subheader(recomendaciones)
