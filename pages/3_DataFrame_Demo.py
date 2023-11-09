@@ -20,11 +20,13 @@ def sr_usuario_franquicia(nombre_usuario):
         sql = """
         SELECT rgm.name user_name,
         ngm.name business_name,
-        rgm.sentiment_analysis,
-        rgm.rating,
+        SUM(rgm.sentiment_analysis) sentiment_analysis,
+        AVG(rgm.rating) rating,
         FROM proyectofinal.review_gm rgm
         INNER JOIN proyectofinal.negocios_gm ngm on rgm.gmap_id = ngm.gmap_id
         WHERE ngm.category LIKE '%Fast food%'
+        AND rating > 3
+        GROUP BY rgm.name, ngm.name
         ORDER BY rgm.name
         """
         df = client.query(sql).to_dataframe()
