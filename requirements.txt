@@ -5,3 +5,4 @@ pydeck
 streamlit
 scikit-learn
 google-cloud-bigquery
+db-dtypes
