@@ -4,3 +4,4 @@ pandas
 pydeck
 streamlit
 scikit-learn
+google-cloud-bigquery

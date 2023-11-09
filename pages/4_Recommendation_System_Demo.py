@@ -19,10 +19,31 @@ import pandas as pd
 import streamlit as st
 from streamlit.hello.utils import show_code
 
+from google.oauth2 import service_account
+from google.cloud import bigquery
+
+# Create API client.
+credentials = service_account.Credentials.from_service_account_info(
+    st.secrets["gcp_service_account"]
+)
+client = bigquery.Client(credentials=credentials)
+
 def data_frame_demo(nombre_negocio):
     @st.cache_data
     def get_data():
-        df = pd.read_csv("pages/data/gmaps_results.csv")
+        sql = """
+        SELECT ngm.name name, 
+        SUM(rgm.sentiment_analysis) sentiment_analysis,
+        AVG(rgm.rating) rating,
+        AVG(ngm.avg_rating) avg_rating
+        FROM `proyectofinal.review_gm` rgm
+        INNER JOIN proyectofinal.negocios_gm ngm ON rgm.gmap_id = ngm.gmap_id
+        WHERE ngm.category LIKE '%Fast food%'
+        GROUP BY ngm.name
+        ORDER BY ngm.name
+        """
+        #df = pd.read_csv("pages/data/gmaps_results.csv")
+        df = client.query(sql).to_dataframe()
         return df
 
     grouped_data = get_data()
