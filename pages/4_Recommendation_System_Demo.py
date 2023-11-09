@@ -143,13 +143,13 @@ else:
     form_sr.subheader(recomendaciones)
 
 form_sr2 = st.form('my_form2')
-nombre_usuario = form_sr.text_input('Nombre del usuario...')
+nombre_usuario = form_sr2.text_input('Nombre del usuario...')
 submit2 = form_sr2.form_submit_button('Recomendar')
 recomendaciones2 = 'Ingrese el nombre del usuario'
 
 if submit2:
     resultados2 = sr_franquicia_franquicia(nombre_usuario)
-    form_sr.subheader(resultados2)
+    form_sr2.subheader(resultados2)
 else:
-    form_sr.subheader(recomendaciones2)
+    form_sr2.subheader(recomendaciones2)
 
