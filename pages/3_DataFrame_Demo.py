@@ -61,7 +61,8 @@ def sr_usuario_franquicia(nombre_usuario):
         usuarios_similares = grouped_data["user_name"].iloc[top_indices]
 
         # Retornar restaurantes de los usuarios similares
-        return grouped_data["business_name"].iloc[usuarios_similares]
+        recomendaciones = grouped_data[grouped_data['user_name'].isin(usuarios_similares)]
+        return recomendaciones['business_name']
     
     return obtener_recomendaciones(nombre_usuario)
 
