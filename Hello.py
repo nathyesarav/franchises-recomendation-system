@@ -14,6 +14,7 @@
 
 import streamlit as st
 from streamlit.logger import get_logger
+from PIL import Image
 
 LOGGER = get_logger(__name__)
 
@@ -25,6 +26,10 @@ def run():
     )
 
     st.write("# Sistema de Recomendación")
+
+    image = Image.open('https://th.bing.com/th/id/OIG.mptJr36wzDYQWkwUzxQZ?pid=ImgGn')
+
+    st.image(image, caption='Fast Food System Recommendation')
 
     st.markdown(
         """
