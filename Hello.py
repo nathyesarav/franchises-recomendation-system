@@ -27,9 +27,7 @@ def run():
 
     st.write("# Sistema de Recomendación")
 
-    image = Image.open(r'https://th.bing.com/th/id/OIG.mptJr36wzDYQWkwUzxQZ?pid=ImgGn')
 
-    st.image(image, caption='Fast Food System Recommendation')
 
     st.markdown(
         """
