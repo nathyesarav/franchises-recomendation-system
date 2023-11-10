@@ -22,12 +22,6 @@ from streamlit.hello.utils import show_code
 from google.oauth2 import service_account
 from google.cloud import bigquery
 
-# Create API client.
-credentials = service_account.Credentials.from_service_account_info(
-    st.secrets["gcp_service_account"]
-)
-client = bigquery.Client(credentials=credentials)
-
 def get_data():
     sql = """
     SELECT ngm.name name, 
@@ -81,6 +75,12 @@ st.sidebar.header("Sistema de Recomendacion Franquicias")
 st.write(
     """Test del sistema de recomendación de negocios de Fast Food para invertir en  Florida"""
 )
+
+# Create API client.
+credentials = service_account.Credentials.from_service_account_info(
+    st.secrets["gcp_service_account"]
+)
+client = bigquery.Client(credentials=credentials)
 
 grouped_data = get_data()
 
