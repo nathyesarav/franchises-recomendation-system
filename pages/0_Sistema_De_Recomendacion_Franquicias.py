@@ -9,29 +9,6 @@ from google.cloud import bigquery
 
 def sr_franquicia_franquicia(nombre_negocio):
 
-    @st.cache_data
-    def get_data():
-        # Create API client.
-        credentials = service_account.Credentials.from_service_account_info(
-            st.secrets["gcp_service_account"]
-        )
-        client = bigquery.Client(credentials=credentials)
-        sql = """
-        SELECT ngm.name name, 
-        SUM(rgm.sentiment_analysis) sentiment_analysis,
-        AVG(rgm.rating) rating,
-        AVG(ngm.avg_rating) avg_rating
-        FROM `proyectofinal.review_gm` rgm
-        INNER JOIN proyectofinal.negocios_gm ngm ON rgm.gmap_id = ngm.gmap_id
-        WHERE ngm.category LIKE '%Fast food%'
-        GROUP BY ngm.name
-        ORDER BY ngm.name
-        """
-        #df = pd.read_csv("pages/data/gmaps_results.csv")
-        df = client.query(sql).to_dataframe()
-        return df
-
-    grouped_data = get_data()
     # Paso 1: Crear un vectorizador TF-IDF para convertir el texto en vectores numéricos
     tfidf_vectorizer = TfidfVectorizer(stop_words='english')
     tfidf_matrix = tfidf_vectorizer.fit_transform(grouped_data['name'])
@@ -69,7 +46,31 @@ st.write(
     """Sistema de recomendación de franquicias de Fast-Food para invertir en Florida"""
 )
 
-lista_negocios = []
+@st.cache_data
+def get_data():
+    # Create API client.
+    credentials = service_account.Credentials.from_service_account_info(
+        st.secrets["gcp_service_account"]
+    )
+    client = bigquery.Client(credentials=credentials)
+    sql = """
+    SELECT ngm.name name, 
+    SUM(rgm.sentiment_analysis) sentiment_analysis,
+    AVG(rgm.rating) rating,
+    AVG(ngm.avg_rating) avg_rating
+    FROM `proyectofinal.review_gm` rgm
+    INNER JOIN proyectofinal.negocios_gm ngm ON rgm.gmap_id = ngm.gmap_id
+    WHERE ngm.category LIKE '%Fast food%'
+    GROUP BY ngm.name
+    ORDER BY ngm.name
+    """
+    #df = pd.read_csv("pages/data/gmaps_results.csv")
+    df = client.query(sql).to_dataframe()
+    return df
+
+grouped_data = get_data()
+
+lista_negocios = grouped_data['name']
 
 form_sr = st.form('my_form')
 nombre_usuario = form_sr.text_input('Nombre de franquicia...')
