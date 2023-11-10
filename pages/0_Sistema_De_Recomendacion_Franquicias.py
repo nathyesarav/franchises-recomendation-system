@@ -62,9 +62,9 @@ def sr_franquicia_franquicia(nombre_negocio):
     
     return obtener_recomendaciones(nombre_negocio)
 
-st.set_page_config(page_title="Demo Sistema de Recomendacion", page_icon="📊")
-st.markdown("# DataFrame Demo")
-st.sidebar.header("DataFrame Demo")
+st.set_page_config(page_title="Sistema de Recomendacion Franquicias", page_icon="📊")
+st.markdown("# Sistema de Recomendacion Franquicias")
+st.sidebar.header("Sistema de Recomendacion Franquicias")
 st.write(
     """Test del sistema de recomendación de franquicias de Fast-Food para invertir en  Florida"""
 )
