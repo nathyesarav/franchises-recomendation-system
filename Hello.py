@@ -29,13 +29,12 @@ def run():
     st.markdown(
         """
         El Sistema de Recomendación tiene los siguientes módulos:
+        - <a href="https://franchisesrecomendationsystem-27pot0lzc4n.streamlit.app/Recommendation_System_Franquicias" target="_self">
+        Recomendación de Franquicias parecidas a la franquicia seleccionada</a>
         - [Recomendación de Franquicias parecidas a la franquicia seleccionada](https://franchisesrecomendationsystem-27pot0lzc4n.streamlit.app/Recommendation_System_Franquicias)
-        - [Recomendación de Franquicias para un usuario seleccionado]
-        (https://franchisesrecomendationsystem-27pot0lzc4n.streamlit.app/Recommendation_System_Usuarios)
-        - [Recomendación de ciudades para invertir]
-        (https://franchisesrecomendationsystem-27pot0lzc4n.streamlit.app/Ciudades_Para_Invertir)
-        - [Categorías conmayor y menor expectativa de Crecimiento]
-        (https://github.com/streamlit/Expectativas_De_Crecimiento)
+        - [Recomendación de Franquicias para un usuario seleccionado](https://franchisesrecomendationsystem-27pot0lzc4n.streamlit.app/Recommendation_System_Usuarios)
+        - [Recomendación de ciudades para invertir](https://franchisesrecomendationsystem-27pot0lzc4n.streamlit.app/Ciudades_Para_Invertir)
+        - [Categorías conmayor y menor expectativa de Crecimiento](https://github.com/streamlit/Expectativas_De_Crecimiento)
     """
     )
 
