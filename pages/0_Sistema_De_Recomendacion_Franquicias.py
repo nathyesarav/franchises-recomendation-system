@@ -47,7 +47,7 @@ def get_data():
 
 grouped_data = get_data()
 
-lista_negocios = grouped_data['name'].tolist
+#lista_negocios = grouped_data['name'].tolist
 
 def sr_franquicia_franquicia(nombre_negocio,grouped_data):
 
