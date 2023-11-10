@@ -8,14 +8,14 @@ from google.oauth2 import service_account
 from google.cloud import bigquery
 
 def sr_franquicia_franquicia(nombre_negocio):
-    # Create API client.
-    credentials = service_account.Credentials.from_service_account_info(
-        st.secrets["gcp_service_account"]
-    )
-    client = bigquery.Client(credentials=credentials)
 
     @st.cache_data
     def get_data():
+        # Create API client.
+        credentials = service_account.Credentials.from_service_account_info(
+            st.secrets["gcp_service_account"]
+        )
+        client = bigquery.Client(credentials=credentials)
         sql = """
         SELECT ngm.name name, 
         SUM(rgm.sentiment_analysis) sentiment_analysis,
