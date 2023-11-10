@@ -28,7 +28,6 @@ credentials = service_account.Credentials.from_service_account_info(
 )
 client = bigquery.Client(credentials=credentials)
 
-@st.cache_data
 def get_data():
     sql = """
     SELECT ngm.name name, 
