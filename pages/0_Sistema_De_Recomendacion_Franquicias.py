@@ -73,7 +73,6 @@ grouped_data = get_data()
 lista_negocios = grouped_data['name']
 
 form_sr = st.form('my_form')
-nombre_usuario = form_sr.text_input('Nombre de franquicia...')
 option = form_sr.selectbox(
     'Seleccione el nombre de la Franquicia',
     (lista_negocios))
@@ -81,7 +80,7 @@ submit = form_sr.form_submit_button('Recomendar')
 recomendaciones = 'Ingrese el nombre del usuario'
 
 if submit:
-    resultados = sr_franquicia_franquicia(nombre_usuario)
+    resultados = sr_franquicia_franquicia(option)
     form_sr.subheader(resultados)
 else:
     form_sr.subheader(recomendaciones)
