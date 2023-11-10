@@ -29,8 +29,7 @@ def run():
     st.markdown(
         """
         El Sistema de Recomendación tiene los siguientes módulos:
-        - [Recomendación de Franquicias parecidas a la franquicia seleccionada]
-        (https://franchisesrecomendationsystem-27pot0lzc4n.streamlit.app/Recommendation_System_Franquicias)
+        - [Recomendación de Franquicias parecidas a la franquicia seleccionada](https://franchisesrecomendationsystem-27pot0lzc4n.streamlit.app/Recommendation_System_Franquicias)
         - [Recomendación de Franquicias para un usuario seleccionado]
         (https://franchisesrecomendationsystem-27pot0lzc4n.streamlit.app/Recommendation_System_Usuarios)
         - [Recomendación de ciudades para invertir]
