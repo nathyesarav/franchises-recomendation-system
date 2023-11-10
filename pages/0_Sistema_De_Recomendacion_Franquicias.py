@@ -45,10 +45,6 @@ def get_data():
     df = client.query(sql).to_dataframe()
     return df
 
-grouped_data = get_data()
-
-lista_negocios = grouped_data['name'].tolist
-
 def sr_franquicia_franquicia(nombre_negocio,grouped_data):
 
     # Paso 1: Crear un vectorizador TF-IDF para convertir el texto en vectores numéricos
@@ -86,6 +82,10 @@ st.sidebar.header("Sistema de Recomendacion Franquicias")
 st.write(
     """Test del sistema de recomendación de negocios de Fast Food para invertir en  Florida"""
 )
+
+grouped_data = get_data()
+
+lista_negocios = grouped_data['name'].tolist
 
 form_sr = st.form('my_form')
 nombre_negocio = form_sr.text_input('Nombre del negocio...')
