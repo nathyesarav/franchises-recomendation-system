@@ -22,24 +22,31 @@ from streamlit.hello.utils import show_code
 from google.oauth2 import service_account
 from google.cloud import bigquery
 
-def get_data():
-    sql = """
-    SELECT ngm.name name, 
-    SUM(rgm.sentiment_analysis) sentiment_analysis,
-    AVG(rgm.rating) rating,
-    AVG(ngm.avg_rating) avg_rating
-    FROM `proyectofinal.review_gm` rgm
-    INNER JOIN proyectofinal.negocios_gm ngm ON rgm.gmap_id = ngm.gmap_id
-    WHERE ngm.category LIKE '%Fast food%'
-    GROUP BY ngm.name
-    ORDER BY ngm.name
-    """
-    df = pd.read_csv("pages/data/gmaps_results.csv")
-    df = client.query(sql).to_dataframe()
-    return df
+# Create API client.
+credentials = service_account.Credentials.from_service_account_info(
+    st.secrets["gcp_service_account"]
+)
+client = bigquery.Client(credentials=credentials)
 
-def sr_franquicia_franquicia(nombre_negocio,grouped_data):
+def sr_franquicia_franquicia(nombre_negocio):
+    @st.cache_data
+    def get_data():
+        sql = """
+        SELECT ngm.name name, 
+        SUM(rgm.sentiment_analysis) sentiment_analysis,
+        AVG(rgm.rating) rating,
+        AVG(ngm.avg_rating) avg_rating
+        FROM `proyectofinal.review_gm` rgm
+        INNER JOIN proyectofinal.negocios_gm ngm ON rgm.gmap_id = ngm.gmap_id
+        WHERE ngm.category LIKE '%Fast food%'
+        GROUP BY ngm.name
+        ORDER BY ngm.name
+        """
+        #df = pd.read_csv("pages/data/gmaps_results.csv")
+        df = client.query(sql).to_dataframe()
+        return df
 
+    grouped_data = get_data()
     # Paso 1: Crear un vectorizador TF-IDF para convertir el texto en vectores numéricos
     tfidf_vectorizer = TfidfVectorizer(stop_words='english')
     tfidf_matrix = tfidf_vectorizer.fit_transform(grouped_data['name'])
@@ -69,31 +76,21 @@ def sr_franquicia_franquicia(nombre_negocio,grouped_data):
     
     return obtener_recomendaciones(nombre_negocio)
 
-st.set_page_config(page_title="Sistema de Recomendacion Franquicias", page_icon="📊")
-st.markdown("# Sistema de Recomendacion Franquicias")
-st.sidebar.header("Sistema de Recomendacion Franquicias")
+st.set_page_config(page_title="Demo Sistema de Recomendacion", page_icon="📊")
+st.markdown("# DataFrame Demo")
+st.sidebar.header("DataFrame Demo")
 st.write(
-    """Test del sistema de recomendación de negocios de Fast Food para invertir en  Florida"""
+    """Test del sistema de recomendación de negocios para invertir en  Florida"""
 )
-
-# Create API client.
-credentials = service_account.Credentials.from_service_account_info(
-    st.secrets["gcp_service_account"]
-)
-client = bigquery.Client(credentials=credentials)
-
-grouped_data = get_data()
-
-lista_negocios = grouped_data['name'].tolist
 
 form_sr = st.form('my_form')
-nombre_negocio = form_sr.text_input('Nombre del negocio...')
-
+nombre_negocio = form_sr.text_input('Nombre del usuario...')
 submit = form_sr.form_submit_button('Recomendar')
+recomendaciones = 'Ingrese el nombre de la franquicia'
 
 if submit:
-    resultados = sr_franquicia_franquicia(nombre_negocio,grouped_data)
+    resultados = sr_franquicia_franquicia(nombre_negocio)
     form_sr.subheader(resultados)
 else:
-    form_sr.subheader('')
+    form_sr.subheader(recomendaciones)
 
