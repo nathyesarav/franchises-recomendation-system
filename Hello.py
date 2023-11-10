@@ -36,7 +36,7 @@ def run():
         - [Recomendación de ciudades para invertir](https://franchisesrecomendationsystem-27pot0lzc4n.streamlit.app/Ciudades_Para_Invertir)
         - [Categorías conmayor y menor expectativa de Crecimiento](https://github.com/streamlit/Expectativas_De_Crecimiento)
     """
-    )
+    , unsafe_allow_html=True)
 
 
 if __name__ == "__main__":
