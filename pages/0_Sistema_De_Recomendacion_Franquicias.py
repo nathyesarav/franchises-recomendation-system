@@ -75,7 +75,7 @@ form_sr = st.form('my_form')
 nombre_usuario = form_sr.text_input('Nombre de franquicia...')
 option = form_sr.selectbox(
     'Seleccione el nombre de la Franquicia',
-    (lista_negocios)
+    (lista_negocios))
 submit = form_sr.form_submit_button('Recomendar')
 recomendaciones = 'Ingrese el nombre del usuario'
 
