@@ -20,29 +20,23 @@ LOGGER = get_logger(__name__)
 
 def run():
     st.set_page_config(
-        page_title="Hello",
-        page_icon="👋",
+        page_title="Sistema de Recomendación",
+        page_icon="📊",
     )
 
-    st.write("# Welcome to Streamlit! 👋")
-
-    st.sidebar.success("Select a demo above.")
+    st.write("# Sistema de Recomendación")
 
     st.markdown(
         """
-        Streamlit is an open-source app framework built specifically for
-        Machine Learning and Data Science projects.
-        **👈 Select a demo from the sidebar** to see some examples
-        of what Streamlit can do!
-        ### Want to learn more?
-        - Check out [streamlit.io](https://streamlit.io)
-        - Jump into our [documentation](https://docs.streamlit.io)
-        - Ask a question in our [community
-          forums](https://discuss.streamlit.io)
-        ### See more complex demos
-        - Use a neural net to [analyze the Udacity Self-driving Car Image
-          Dataset](https://github.com/streamlit/demo-self-driving)
-        - Explore a [New York City rideshare dataset](https://github.com/streamlit/demo-uber-nyc-pickups)
+        El Sistema de Recomendación tiene los siguientes módulos:
+        - [Recomendación de Franquicias parecidas a la franquicia seleccionada]
+        (https://franchisesrecomendationsystem-27pot0lzc4n.streamlit.app/Recommendation_System_Franquicias)
+        - [Recomendación de Franquicias para un usuario seleccionado]
+        (https://franchisesrecomendationsystem-27pot0lzc4n.streamlit.app/Recommendation_System_Usuarios)
+        - [Recomendación de ciudades para invertir]
+        (https://franchisesrecomendationsystem-27pot0lzc4n.streamlit.app/Ciudades_Para_Invertir)
+        - [Categorías conmayor y menor expectativa de Crecimiento]
+        (https://github.com/streamlit/Expectativas_De_Crecimiento)
     """
     )
 
