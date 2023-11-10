@@ -91,7 +91,7 @@ form_sr = st.form('my_form')
 nombre_negocio = form_sr.text_input('Nombre del negocio...')
 option = st.selectbox(
    "Seleccione la Franqicia de referencia",
-   (lista_negocios),
+   ('1','2'),
    index=None,
    placeholder="Seleccione la Franqicia...",
 )
