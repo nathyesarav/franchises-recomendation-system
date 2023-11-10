@@ -4,17 +4,16 @@ import pandas as pd
 
 import streamlit as st
 from streamlit.hello.utils import show_code
-
 from google.oauth2 import service_account
 from google.cloud import bigquery
 
-# Create API client.
-credentials = service_account.Credentials.from_service_account_info(
-    st.secrets["gcp_service_account"]
-)
-client = bigquery.Client(credentials=credentials)
-
 def sr_franquicia_franquicia(nombre_negocio):
+    # Create API client.
+    credentials = service_account.Credentials.from_service_account_info(
+        st.secrets["gcp_service_account"]
+    )
+    client = bigquery.Client(credentials=credentials)
+
     @st.cache_data
     def get_data():
         sql = """
@@ -60,17 +59,23 @@ def sr_franquicia_franquicia(nombre_negocio):
         # Devolver los nombres de los negocios más similares
         return grouped_data["name"].iloc[top_indices]
     
+    lista_negocios = grouped_data["name"]
     return obtener_recomendaciones(nombre_negocio)
 
 st.set_page_config(page_title="Sistema de Recomendacion Franquicias", page_icon="📊")
 st.markdown("# Sistema de Recomendacion Franquicias")
 st.sidebar.header("Sistema de Recomendacion Franquicias")
 st.write(
-    """Test del sistema de recomendación de franquicias de Fast-Food para invertir en  Florida"""
+    """Sistema de recomendación de franquicias de Fast-Food para invertir en Florida"""
 )
+
+lista_negocios = []
 
 form_sr = st.form('my_form')
 nombre_usuario = form_sr.text_input('Nombre de franquicia...')
+option = st.selectbox(
+    'Seleccione el nombre de la Franquicia',
+    (lista_negocios))
 submit = form_sr.form_submit_button('Recomendar')
 recomendaciones = 'Ingrese el nombre del usuario'
 
